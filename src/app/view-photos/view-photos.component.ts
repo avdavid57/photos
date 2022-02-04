@@ -7,12 +7,21 @@ import { PhotosService } from '../photos.service';
   styleUrls: ['./view-photos.component.css']
 })
 export class ViewPhotosComponent implements OnInit {
+  photoUrl: string = "";
 
   constructor(private photosService: PhotosService) {
-    this.photosService.getPhoto().subscribe(() => {
-
-    });
+    this.fetchPhoto();
    }
+
+  onClick() {
+    this.fetchPhoto();
+  }
+
+  fetchPhoto() {
+    this.photosService.getPhoto().subscribe((response) => {
+      this.photoUrl = response.urls.regular;
+      });
+  }
 
   ngOnInit(): void {
   }
